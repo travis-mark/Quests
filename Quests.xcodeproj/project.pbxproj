@@ -11,6 +11,8 @@
 		1FCF07E42A102E4200BAD75A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF07E32A102E4200BAD75A /* ContentView.swift */; };
 		1FCF07E62A102E4300BAD75A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF07E52A102E4300BAD75A /* Assets.xcassets */; };
 		1FCF07E92A102E4300BAD75A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF07E82A102E4300BAD75A /* Preview Assets.xcassets */; };
+		1FCF07F02A102F2C00BAD75A /* EventUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF07EF2A102F2C00BAD75A /* EventUtils.swift */; };
+		1FCF07F22A10329400BAD75A /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF07F12A10329400BAD75A /* EventList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		1FCF07E32A102E4200BAD75A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1FCF07E52A102E4300BAD75A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FCF07E82A102E4300BAD75A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1FCF07EF2A102F2C00BAD75A /* EventUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUtils.swift; sourceTree = "<group>"; };
+		1FCF07F12A10329400BAD75A /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +55,11 @@
 		1FCF07E02A102E4200BAD75A /* Quests */ = {
 			isa = PBXGroup;
 			children = (
-				1FCF07E12A102E4200BAD75A /* QuestsApp.swift */,
-				1FCF07E32A102E4200BAD75A /* ContentView.swift */,
 				1FCF07E52A102E4300BAD75A /* Assets.xcassets */,
+				1FCF07F12A10329400BAD75A /* EventList.swift */,
+				1FCF07EF2A102F2C00BAD75A /* EventUtils.swift */,
+				1FCF07E32A102E4200BAD75A /* ContentView.swift */,
+				1FCF07E12A102E4200BAD75A /* QuestsApp.swift */,
 				1FCF07E72A102E4300BAD75A /* Preview Content */,
 			);
 			path = Quests;
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FCF07F22A10329400BAD75A /* EventList.swift in Sources */,
 				1FCF07E42A102E4200BAD75A /* ContentView.swift in Sources */,
 				1FCF07E22A102E4200BAD75A /* QuestsApp.swift in Sources */,
+				1FCF07F02A102F2C00BAD75A /* EventUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +278,9 @@
 				DEVELOPMENT_TEAM = PGUSZZ68XF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Show today's events";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Show contact info in events";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Show reminders and streaks";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +310,9 @@
 				DEVELOPMENT_TEAM = PGUSZZ68XF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Show today's events";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Show contact info in events";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Show reminders and streaks";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
