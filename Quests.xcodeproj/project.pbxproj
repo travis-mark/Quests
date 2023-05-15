@@ -13,6 +13,7 @@
 		1FCF07E92A102E4300BAD75A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF07E82A102E4300BAD75A /* Preview Assets.xcassets */; };
 		1FCF07F02A102F2C00BAD75A /* EventUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF07EF2A102F2C00BAD75A /* EventUtils.swift */; };
 		1FCF07F22A10329400BAD75A /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF07F12A10329400BAD75A /* EventList.swift */; };
+		1FCF07F42A11C8D400BAD75A /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF07F32A11C8D400BAD75A /* EventDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		1FCF07E82A102E4300BAD75A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1FCF07EF2A102F2C00BAD75A /* EventUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUtils.swift; sourceTree = "<group>"; };
 		1FCF07F12A10329400BAD75A /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
+		1FCF07F32A11C8D400BAD75A /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				1FCF07E52A102E4300BAD75A /* Assets.xcassets */,
+				1FCF07F32A11C8D400BAD75A /* EventDetailView.swift */,
 				1FCF07F12A10329400BAD75A /* EventList.swift */,
 				1FCF07EF2A102F2C00BAD75A /* EventUtils.swift */,
 				1FCF07E32A102E4200BAD75A /* ContentView.swift */,
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FCF07F22A10329400BAD75A /* EventList.swift in Sources */,
+				1FCF07F42A11C8D400BAD75A /* EventDetailView.swift in Sources */,
 				1FCF07E42A102E4200BAD75A /* ContentView.swift in Sources */,
 				1FCF07E22A102E4200BAD75A /* QuestsApp.swift in Sources */,
 				1FCF07F02A102F2C00BAD75A /* EventUtils.swift in Sources */,
