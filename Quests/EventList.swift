@@ -5,7 +5,7 @@ import SwiftUI
 import EventKit
 
 struct EventList: View {
-    @State var data: [EKCalendarItem] = []
+    let data: [EKCalendarItem]
     var body: some View {
         NavigationView {
             List {
@@ -14,15 +14,7 @@ struct EventList: View {
                         Text("\(item.title)")
                     }
                 }
-            }.onAppear {
-                let store = EventManager.main.store
-                let predicate: NSPredicate? = store.predicateForReminders(in: nil)
-                if let predicate = predicate {
-                    store.fetchReminders(matching: predicate) {
-                        reminders in data = reminders ?? []
-                    }
-                }
-            }.navigationTitle("Reminders")
+            }
         }
     }
 }
