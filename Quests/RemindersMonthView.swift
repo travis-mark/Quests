@@ -4,25 +4,52 @@
 import SwiftUI
 import EventKit
 
-func beginningOfMonth(for date: Date) -> Date {
-    let calendar = Calendar.current
-    let components = calendar.dateComponents([.year, .month], from: date)
-    return calendar.date(from: components) ?? date
+public struct Group<K,G> : Hashable where K: Hashable, G: Equatable {
+    public static func == (lhs: Group<K, G>, rhs: Group<K, G>) -> Bool {
+        return lhs.key == rhs.key && lhs.group == lhs.group
+    }
+    
+    public let key: K
+    public let group: [G]
+    
+    public init(key: K, group: [G]) {
+        self.key = key
+        self.group = group
+    }
+    
+    public var hashValue: Int {
+        return key.hashValue
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        key.hash(into: &hasher)
+    }
 }
 
-func endOfMonth(for date: Date) -> Date {
-    let calendar = Calendar.current
-    guard let beginningOfMonth = calendar.dateInterval(of: .month, for: date)?.start else {
-        return date
+public extension Sequence {
+    func groupBy<U: Hashable>(_ block: (Iterator.Element) -> U) -> [Group<U,Iterator.Element>] {
+        let keyArray = self.map(block)
+        let keySet = Set<U>(keyArray)
+        var groups: [Group<U,Iterator.Element>] = []
+        
+        for key in keySet {
+            var items: [Iterator.Element] = []
+            for (idx, item) in self.enumerated() {
+                if key == keyArray[idx] {
+                    items.append(item)
+                }
+            }
+            groups.append(Group(key: key, group: items))
+        }
+        
+        return groups
     }
-    let components = DateComponents(month: 1, day: -1)
-    return calendar.date(byAdding: components, to: beginningOfMonth) ?? date
 }
 
 struct RemindersMonthView: View {
-    @State var reminders: [EKReminder] = []
-    @State var startDate: Date = beginningOfMonth(for: Date.now)
-    @State var endDate: Date = endOfMonth(for: Date.now)
+    @State var reminderGroups: [Group<String, EKReminder>] = []
+    @State var startDate: Date = Month.first(for: Date.now)
+    @State var endDate: Date = Month.last(for: Date.now)
     
     init() {
         self.refresh()
@@ -32,30 +59,40 @@ struct RemindersMonthView: View {
         let store = EventManager.main.store
         let predicate = store.predicateForCompletedReminders(withCompletionDateStarting: startDate, ending: endDate, calendars: nil)
         store.fetchReminders(matching: predicate) {
-            reminders in self.reminders = reminders ?? []
+            reminders in self.reminderGroups = reminders?.groupBy({ $0.title }) ?? []
         }
     }
     
     var body: some View {
-        HStack {
-            Button(action: {
-                self.startDate = beginningOfMonth(for: self.startDate.advanced(by: -86400))
-                self.refresh()
-            }) {
-                Text("<")
+        VStack {
+            HStack {
+                Button(action: {
+                    self.startDate = Month.first(for: Month.add(amount: -1, to: startDate))
+                    self.endDate = Month.last(for: self.startDate)
+                    self.refresh()
+                }) {
+                    Image(systemName: "chevron.left")
+                }.frame(minWidth: 44, minHeight: 44)
+                Spacer()
+                Text(Month.format(startDate))
+                Spacer()
+                Button(action: {
+                    self.startDate = Month.first(for: Month.add(amount: 1, to: startDate))
+                    self.endDate = Month.last(for: self.startDate)
+                    self.refresh()
+                }) {
+                    Image(systemName: "chevron.right")
+                }.frame(minWidth: 44, minHeight: 44)
             }
-            Text("\(startDate) - \(endDate)")
-            Button(action: {
-                self.endDate = endOfMonth(for: self.endDate.advanced(by: 86400))
-                self.refresh()
-            }) {
-                Text(">")
-            }
-        }
-        List {
-            ForEach(reminders, id: \.self) { item in
-                NavigationLink(destination: EventDetailView(item: item)) {
-                    Text("\(item.title)")
+            List {
+                ForEach(reminderGroups, id: \.self) { group in
+                    NavigationLink(destination: EventList(data: group.group)) {
+                        HStack {
+                            Text(group.key)
+                            Spacer()
+                            Text(String(group.group.count))
+                        }
+                    }
                 }
             }
         }

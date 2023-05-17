@@ -5,33 +5,33 @@ import SwiftUI
 import EventKit
 
 struct ContentView: View {
-//    @State var events: [EKCalendarItem]? = nil
+    @State var events: [EKCalendarItem]? = nil
     var body: some View {
-//        TabView {
-//            ZStack {
-//                if let events = events {
-//                    EventList(data: events).navigationTitle("Events")
-//                } else {
-//                    Text("LOADING")
-//                }
-//            }
-//            .tabItem {
-//                Image(systemName: "calendar")
-//                Text("Events")
-//            }
-            RemindersMonthView()
-//            .tabItem {
-//                Image(systemName: "list.bullet")
-//                Text("Reminders")
-//            }
-//        }.onAppear {
-//            let store = EventManager.main.store
-//            // Different APIs for events and reminders why?
-//            // Events
-//            let predicate = store.predicateForEvents(withStart: Date.now, end: Date.now, calendars: nil)
-//            let events = store.events(matching: predicate)
-//            self.events = events
-//        }
+        TabView {
+            ZStack {
+                if let events = events {
+                    EventList(data: events).navigationTitle("Events")
+                } else {
+                    Text("LOADING")
+                }
+            }
+            .onAppear {
+                let store = EventManager.main.store
+                let predicate = store.predicateForEvents(withStart: Month.first(for: Date.now), end: Month.last(for: Date.now), calendars: nil)
+                let events = store.events(matching: predicate)
+                self.events = events
+            }
+            .tabItem {
+                Image(systemName: "calendar")
+                Text("Events")
+            }
+            NavigationView {
+                RemindersMonthView()
+            }.tabItem {
+                Image(systemName: "list.bullet")
+                Text("Reminders")
+            }
+        }
         
     }
 }

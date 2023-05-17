@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F1313F62A146C7D006D7DE9 /* RemindersMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1313F52A146C7D006D7DE9 /* RemindersMonthView.swift */; };
+		1F8866A72A157C2F007A266A /* MonthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8866A62A157C2F007A266A /* MonthUtils.swift */; };
 		1FCF07E22A102E4200BAD75A /* QuestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF07E12A102E4200BAD75A /* QuestsApp.swift */; };
 		1FCF07E42A102E4200BAD75A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF07E32A102E4200BAD75A /* ContentView.swift */; };
 		1FCF07E62A102E4300BAD75A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF07E52A102E4300BAD75A /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		1F1313F52A146C7D006D7DE9 /* RemindersMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersMonthView.swift; sourceTree = "<group>"; };
+		1F8866A62A157C2F007A266A /* MonthUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthUtils.swift; sourceTree = "<group>"; };
 		1FCF07DE2A102E4200BAD75A /* Quests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FCF07E12A102E4200BAD75A /* QuestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestsApp.swift; sourceTree = "<group>"; };
 		1FCF07E32A102E4200BAD75A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				1FCF07F32A11C8D400BAD75A /* EventDetailView.swift */,
 				1FCF07F12A10329400BAD75A /* EventList.swift */,
 				1FCF07EF2A102F2C00BAD75A /* EventUtils.swift */,
+				1F8866A62A157C2F007A266A /* MonthUtils.swift */,
 				1F1313F52A146C7D006D7DE9 /* RemindersMonthView.swift */,
 				1FCF07E12A102E4200BAD75A /* QuestsApp.swift */,
 				1FCF07E72A102E4300BAD75A /* Preview Content */,
@@ -152,6 +155,7 @@
 				1FCF07F22A10329400BAD75A /* EventList.swift in Sources */,
 				1F1313F62A146C7D006D7DE9 /* RemindersMonthView.swift in Sources */,
 				1FCF07F42A11C8D400BAD75A /* EventDetailView.swift in Sources */,
+				1F8866A72A157C2F007A266A /* MonthUtils.swift in Sources */,
 				1FCF07E42A102E4200BAD75A /* ContentView.swift in Sources */,
 				1FCF07E22A102E4200BAD75A /* QuestsApp.swift in Sources */,
 				1FCF07F02A102F2C00BAD75A /* EventUtils.swift in Sources */,
