@@ -7,12 +7,10 @@ import EventKit
 struct EventList: View {
     let data: [EKCalendarItem]
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(data, id: \.self) { item in
-                    NavigationLink(destination: EventDetailView(item: item)) {
-                        Text("\(item.title)")
-                    }
+        List {
+            ForEach(data, id: \.self) { item in
+                NavigationLink(destination: EventDetailView(item: item)) {
+                    Text("\(item.title)")
                 }
             }
         }
