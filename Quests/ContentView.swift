@@ -8,12 +8,8 @@ struct ContentView: View {
     @State var events: [EKCalendarItem]? = nil
     var body: some View {
         TabView {
-            ZStack {
-                if let events = events {
-                    EventList(data: events).navigationTitle("Events")
-                } else {
-                    Text("LOADING")
-                }
+            NavigationView {
+                EventList(data: events ?? []).navigationTitle("Events")
             }
             .onAppear {
                 let store = EventManager.main.store
