@@ -27,6 +27,13 @@ struct ContentView: View {
                 Image(systemName: "list.bullet")
                 Text("Reminders")
             }
+            NavigationView {
+                RemindersCalendarView()
+            }
+            .tabItem {
+                Image(systemName: "calendar")
+                Text("Calendar")
+            }
         }
         
     }
