@@ -51,15 +51,16 @@ struct RemindersMonthView: View {
     @State var startDate: Date = Month.first(for: Date.now)
     @State var endDate: Date = Month.last(for: Date.now)
     
-    init() {
-        self.refresh()
-    }
-    
+    // TODO: Takes about 1ms per record. Needs to be cached
     func refresh() {
+        let m = Month.format(startDate)
+        let t0 = Date().timeIntervalSince1970
+        
         let store = EventManager.main.store
         let predicate = store.predicateForCompletedReminders(withCompletionDateStarting: startDate, ending: endDate, calendars: nil)
-        store.fetchReminders(matching: predicate) {
-            reminders in self.reminderGroups = reminders?.groupBy({ $0.title }) ?? []
+        store.fetchReminders(matching: predicate) { reminders in
+            NSLog("\(m) :: \(reminders?.count ?? -1) :: \(Date().timeIntervalSince1970 - t0)")
+            self.reminderGroups = reminders?.groupBy({ $0.title }) ?? []
         }
     }
     
@@ -95,6 +96,8 @@ struct RemindersMonthView: View {
                     }
                 }
             }
+        }.onAppear {
+            self.refresh()
         }
     }
 }
