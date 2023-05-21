@@ -17,7 +17,7 @@ struct RemindersCalendarView: View {
     @State private var currentMonth: Date = Date()
     @State private var selectedDate: Date?
     @State private var monthReminders: [EKReminder] = []
-    @State private var dayReminders: [EKReminder] = []
+    @State private var dayReminders: [EKCalendarItem] = []
     
     func loadMonth() {
         let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
@@ -29,20 +29,11 @@ struct RemindersCalendarView: View {
         }
     }
     
-    func loadDay() {
+    func loadDay() async {
         if let selectedDate = selectedDate {
             let startDate = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: selectedDate))!
             let endDate = calendar.date(byAdding: DateComponents(day: 1), to: startDate)!
-            dayReminders = monthReminders.filter { r in
-                if let date = r.completionDate {
-                    return startDate < date && date < endDate
-                } else if let dc = r.dueDateComponents, let date = calendar.date(from: dc) {
-                    return startDate < date && date < endDate
-                } else {
-                    return false
-                }
-                
-            }
+            dayReminders = await EventManager.main.fetch(withStart: startDate, end: endDate)
         } else {
             dayReminders = []
         }
@@ -87,7 +78,9 @@ struct RemindersCalendarView: View {
                                 .background(selectedDate == date ? Color.red : Color.clear)
                                 .onTapGesture {
                                     selectedDate = selectedDate == date ? nil : date
-                                    self.loadDay()
+                                    Task {
+                                        await self.loadDay()
+                                    }
                                 }
                         }
                     }

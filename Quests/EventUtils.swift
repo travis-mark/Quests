@@ -28,5 +28,20 @@ class EventManager {
         }
     }
     
+    public func fetch(withStart startDate: Date, end endDate: Date) async -> [EKCalendarItem] {
+        let events: [EKEvent] = await withUnsafeContinuation { continuation in
+            let predicate = store.predicateForEvents(withStart: startDate, end: endDate, calendars: nil)
+            let events = store.events(matching: predicate)
+            continuation.resume(returning: events)
+        }
+        let reminders: [EKReminder] = await withUnsafeContinuation { continuation in
+            let predicate = store.predicateForCompletedReminders(withCompletionDateStarting: startDate, ending: endDate, calendars: nil)
+            store.fetchReminders(matching: predicate) { reminders in
+                continuation.resume(returning: reminders ?? [])
+            }
+        }
+        return events + reminders
+    }
+    
     static let main = EventManager()
 }
