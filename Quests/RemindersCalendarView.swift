@@ -13,9 +13,8 @@ struct RemindersCalendarView: View {
         dayFormatter.dateFormat = "d"
     }
     
-    // TODO: Make DateComponents?
     @State private var currentMonth: Date = Date()
-    @State private var selectedDate: Date?
+    @State private var selectedDate: Date = Date()
     @State private var monthReminders: [EKReminder] = []
     @State private var dayReminders: [EKCalendarItem] = []
     
@@ -30,13 +29,9 @@ struct RemindersCalendarView: View {
     }
     
     func loadDay() async {
-        if let selectedDate = selectedDate {
-            let startDate = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: selectedDate))!
-            let endDate = calendar.date(byAdding: DateComponents(day: 1), to: startDate)!
-            dayReminders = await EventManager.main.fetch(withStart: startDate, end: endDate)
-        } else {
-            dayReminders = []
-        }
+        let startDate = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: selectedDate))!
+        let endDate = calendar.date(byAdding: DateComponents(day: 1), to: startDate)!
+        dayReminders = await EventManager.main.fetch(withStart: startDate, end: endDate)
     }
     
     var body: some View {
@@ -77,7 +72,7 @@ struct RemindersCalendarView: View {
                                 .foregroundColor(isDateDisabled(date) ? Color.gray : Color(UIColor.label))
                                 .background(selectedDate == date ? Color.red : Color.clear)
                                 .onTapGesture {
-                                    selectedDate = selectedDate == date ? nil : date
+                                    selectedDate = date
                                     Task {
                                         await self.loadDay()
                                     }
@@ -86,9 +81,12 @@ struct RemindersCalendarView: View {
                     }
                 }
             }
-            EventList(data: selectedDate != nil ? dayReminders : monthReminders)
+            EventList(data: dayReminders)
         }.onAppear {
-            self.loadMonth()
+            Task {
+                self.loadMonth()
+                await self.loadDay()
+            }
         }
     }
     
